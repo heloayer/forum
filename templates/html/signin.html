@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-in</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="icon" href='/static/img/f.png' type="image/png">
+</head>
+<body>
+    <div class="center">
+        <h1>Login</h1>
+        <form action="/sign-in" method="post">
+            <div class="txt_field">
+                <input type="text" name="email" required>
+                <span></span>
+                <label>Email</label>
+            </div>
+            <div class="txt_field">
+                <input type="password" name="password" required>
+                <span></span>
+                <label>Password</label>
+            </div>
+            <input type="submit" value="Sign in">
+            <div class="signup_link">
+                Not a member? <a href="/sign-up-form">Sign up</a>
+            </div>
+            <div class="signup_link">
+                Back to welcome page <a href="/welcome">Welcome</a>
+            </div>
+            <div >
+                <h4>{{ .Message}}</h4>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

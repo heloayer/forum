@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum</title>
+    <link rel="stylesheet" href="/static/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    <link rel="icon" href='/static/img/f.png' type="image/png">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/welcome/filter?category=most-like">
+                <i class="fas fa-home"> </i>
+                <span class="nav-item">MostLiked</span>
+            </a></li>
+            <li><a href="/welcome/filter?category=most-dislike">
+                <i class="fas fa-sun"> </i>
+                <span class="nav-item">MostDisliked</span>
+            </a></li>
+            <li><a href="/welcome/filter?category=fantazy">
+                <i class="fas fa-question-circle"> </i>
+                <span class="nav-item">Fantazy</span>
+            </a></li>
+            <li><a href="/welcome/filter?category=drama">
+                <i class="fas fa-tv"> </i>
+                <span class="nav-item">Drama</span>
+            </a></li>
+            <li><a href="/welcome/filter?category=comedy">
+                <i class="fas fa-book"> </i>
+                <span class="nav-item">Comedy</span>
+            </a></li>
+            <li><a href="/welcome/filter?category=adventure">
+                <i class="fas fa-music"> </i>
+                <span class="nav-item">Adventure</span>
+            </a></li>
+            <li><a href="/welcome/filter?category=romance">
+                <i class="fas fa-list"> </i>
+                <span class="nav-item">Romance</span>
+            </a></li>
+            <li><a href="/sign-in-form" >
+                <i class="fas fa-sign-out-alt"> </i>
+                <span class="nav-item">Sign-in</span>
+            </a></li>
+            <li><a href="/sign-up-form" >
+                <i class="fas fa-sign-in-alt"> </i>
+                <span class="nav-item">Sign-up</span>
+            </a></li>
+        </ul>
+    </nav>
+        {{ range .Posts}}
+        <div class="post">
+            <div class="post__header">
+                <img class="post__avatar" src="/static/img/avatar.png" />
+                <div class="post__info">
+                    <h3 class="post__author">{{ .Author.Username}}</h3>
+                    <span class="post__category">{{ .Category}}</span>
+                    <span class="post__created-time">{{ .CreateTime}}</span>
+                </div>
+            </div>
+            <h2 class="post__title">{{ .Title}}</h2>
+            <div class="post__content">
+                {{ .Content}}
+            </div>
+            <div class="post__actions">
+                <span class="post__likes"><img src="/static/img/love.png" width="30" alt="logo">{{ .Like}}</span>
+                <span class="post__dislikes"><img src="/static/img/dislike.png" width="30" alt="logo">{{ .Dislike}}</span>
+            </div>
+            <form class="view" action="/welcome/comment-view?id={{.ID}}" method="post">
+                <input type="submit" value="view comment">
+            </form>
+        </div>
+        {{end}}
+
+</body>
+</html>

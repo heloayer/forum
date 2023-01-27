@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum</title>
+    <link rel="stylesheet" href="/static/index.css">
+    <link rel="icon" href='/static/img/f.png' type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">
+                <i class="fas fa-user"> </i>
+                    <span class="nav-item"> {{.User.Username}}
+                    </span>
+            </a></li>
+            <li><a href="/filter?category=most-like">
+                <i class="fas fa-home"> </i>
+                <span class="nav-item">MostLiked</span>
+            </a></li>
+            <li><a href="/filter?category=most-dislike">
+                <i class="fas fa-sun"> </i>
+                <span class="nav-item">MostDisliked</span>
+            </a></li>
+            <li><a href="/filter?category=liked-post">
+                <i class="fas fa-heart"> </i>
+                <span class="nav-item">Liked posts</span>
+            </a></li>
+            <li><a href="/filter?category=created-post">
+                <i class="fas fa-tasks"> </i>
+                <span class="nav-item">Created posts</span>
+            </a></li>
+            <li><a href="/filter?category=fantazy">
+                <i class="fas fa-question-circle"> </i>
+                <span class="nav-item">Fantazy</span>
+            </a></li>
+            <li><a href="/filter?category=drama">
+                <i class="fas fa-tv"> </i>
+                <span class="nav-item">Drama</span>
+            </a></li>
+            <li><a href="/filter?category=comedy">
+                <i class="fas fa-book"> </i>
+                <span class="nav-item">Comedy</span>
+            </a></li>
+            <li><a href="/filter?category=adventure">
+                <i class="fas fa-music"> </i>
+                <span class="nav-item">Adventure</span>
+            </a></li>
+            <li><a href="/filter?category=romance">
+                <i class="fas fa-list"> </i>
+                <span class="nav-item">Romance</span>
+            </a></li>
+            <li><a href="/logout" class="logout">
+                <i class="fas fa-sign-out-alt"> </i>
+                <span class="nav-item">Logout</span>
+            </a></li>
+        </ul>
+    </nav>
+
+    <div class="create_post">
+        <a href="/create-post-form"><h1 class="posts">Create Post</h1></a>
+     </div>
+    {{ $genre :=  .Genre }}
+    {{ range .Posts}}
+    <div class="post">
+        <div class="post__header">
+            <img class="post__avatar" src="/static/img/avatar.png" />
+            <div class="post__info">
+                <h3 class="post__author">{{ .Author.Username}}</h3>
+                <span class="post__category">{{ .Category}}</span>
+                <span class="post__created-time">{{ .CreateTime}}</span>
+            </div>
+        </div>
+        <h2 class="post__title">{{ .Title}}</h2>
+        <div class="post__content">
+            {{ .Content}}
+        </div>
+        <div class="post__actions">
+            <form action="/like-post?id={{.ID}}&path=/filter?category={{ $genre}}" method="post">
+                <span class="post__likes"><input type="image"  class="imagesL" src="/static/img/love.png" width="50">{{ .Like}}</span>
+               </form>
+            <form action="/dislike-post?id={{.ID}}&path=/filter?category={{ $genre}}" method="post">
+                <span class="post__dislikes"><input type="image"  class="imagesD" src="/static/img/dislike.png" width="50">{{ .Dislike}}</span>
+               </form>
+        </div>
+        <form action="/comment-post?id={{.ID}}" method="post">
+            <input  type="text" name="comment" required>
+            <input type="submit" value="create comment">
+        </form>
+        <form class="view" action="/comment-view?id={{.ID}}"  method="post">
+            <input type="submit" value="view comment">
+        </form>
+    </div>
+    {{end}}
+</body>
+</html>

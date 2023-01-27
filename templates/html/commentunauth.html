@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/index.css">
+    <link rel="icon" href='/static/img/f.png' type="image/png">
+    <title></title>
+    <style>
+        h1{
+            text-align: center;
+        }
+        .post {
+            margin: 20px auto;
+            padding: 20px;
+            box-shadow: 0px 0px 300px #00000020;
+            border-radius: 5px;
+            width: 80%;
+        }
+        
+        .post__header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .post__avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .post__info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .post__title {
+            margin: 0;
+            margin-bottom: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .post__content {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .post__actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .post__likes, .post__dislikes {
+            font-size: 15px;
+            font-weight: bold;
+            font-style: italic;
+            color: rgb(10, 9, 9);
+        }
+        input {
+            outline: none;
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 8px #ccc;
+            display: block;
+            margin: 10px auto;
+        }
+        .view{
+            font-style: italic;
+        }
+        .comment {
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        .author {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .avatar {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            border-radius: 50%;
+        }
+
+        .name {
+            font-weight: bold;
+        }
+
+        .message {
+            padding: 10px;
+            background: #f2f2f2;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .likes-dislikes {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .likes, .dislikes {
+            font-weight: bold;
+        }
+        </style>
+</head>
+<body>
+    <h1>Post</h1>
+    <div class="post">
+        <div class="post__header">
+            <img class="post__avatar" src="/static/img/avatar.png" />
+            <div class="post__info">
+                <h3 class="post__author">{{ .InitialPost.Author.Username}}</h3>
+                <span class="post__category">{{ .InitialPost.Category}}</span>
+                <span class="post__created-time">{{ .InitialPost.CreateTime}}</span>
+            </div>
+        </div>
+        <h2 class="post__title">{{ .InitialPost.Title}}</h2>
+        <div class="post__content">
+            {{ .InitialPost.Content }}
+        </div>
+        <div class="post__actions">
+                <span class="post__likes"><img src="/static/img/love.png" width="50">{{ .InitialPost.Like}}</span>
+                <span class="post__dislikes"><img src="/static/img/dislike.png" width="50">{{ .InitialPost.Dislike}}</span>
+        </div>
+        <h3>Comments: </h3>
+        {{ range .Comment}}
+        <div class="comment">
+            <div class="author">
+                <img src="/static/img/avatar.png" alt="Avatar" class="avatar">
+                <span class="name">{{ .Username}}</span>
+            </div>
+            <p class="post_created-time">{{ .Born}}</p>
+            <div class="message">
+                <p> {{ .Message}} </p>
+            </div>
+            <div class="likes-dislikes">
+                    <span><img src="/static/img/love.png"  width="45">{{ .Like}}</span>
+                    <span><img src="/static/img/dislike.png" width="45">{{ .Dislike}}</span>
+            </div>
+        </div>
+        {{end}}
+    </div>
+</body>
+</html>

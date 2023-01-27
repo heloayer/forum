@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Post</title>
+  <link rel="icon" href='/static/img/f.png' type="image/png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #dfe9f5;
+    }
+    #form-create {
+      width: 440px;
+      margin: 0 auto;
+      padding: 10px;
+    }
+    #form-create label {
+      font-size: 14px;
+      font-weight: bold;
+      display: block;
+      margin-bottom: 10px;
+    }
+    #form-create input[type="text"],
+    #form-create textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      font-family: sans-serif;
+      margin-bottom: 10px;
+    }
+    #form-create input[type="checkbox"] {
+      margin-right: 10px;
+    }
+    #form-create input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 15px;
+      font-weight: bold;
+    }
+    @media screen and (max-width: 480px) {
+      #form-create {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="form-create">
+    <form  action="/create-post" method="POST">
+      <label for="title">Title:</label>
+      <input type="text" name="title" placeholder="Enter post title..." required>
+      <label for="category">Category:</label>
+      <input type="checkbox" name="category" value="fantazy">Fantasy 
+      <input type="checkbox" name="category" value="drama"  >Drama
+      <input type="checkbox" name="category" value="comedy" checked >Comedy
+      <input type="checkbox" name="category" value="adventure" >Adventure 
+      <input type="checkbox" name="category" value="romance" >Romance
+      <label for="content">Content:</label>
+      <textarea name="message" cols="30" rows="10" placeholder="Enter post content..." required></textarea>
+      <input type="submit" value="Create">
+    </form>
+  </div>
+</body>
+</html>

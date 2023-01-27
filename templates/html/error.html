@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/error.css">
+    <link rel="icon" href='/static/img/f.png' type="image/png">
+    <title>{{ .StatusCode}} - {{ .StatusText}}</title>
+    
+</head>
+<body>
+    <div id="container">
+        <div class="content">
+            <h2>{{ .StatusCode}}</h2>
+            <h4>Oops! {{ .StatusText}}.</h4>
+            <p>The page  doesn't work.</p>
+            <a href="/">Go back home</a>
+        </div>
+    </div>
+</body>
+</html>

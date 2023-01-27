@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-up</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="icon" href='/static/img/f.png' type="image/png">
+</head>
+<body>
+    <div class="center">
+        <h1>Register</h1>
+        <form action="/sign-up" method="post">
+            <div class="txt_field">
+                <input type="text" name="username" id="username" title="Username must be between 6 to 20 characters long" required pattern="[A-Za-z0-9\-_\.]{6,20}" >
+                <span></span>
+                <label>Username</label>
+            </div>
+     
+            <div class="txt_field">
+                <input type="email" name="email" id="email" required maxlength="254"
+                autocapitalize="off" spellcheck="false" autocorrect="off" pattern="(?![_.-])((?![_.-][_.-])[a-zA-Z\d_.-]){0,63}[a-zA-Z\d]@((?!-)((?!--)[a-zA-Z\d-]){0,63}[a-zA-Z\d]\.){1,2}([a-zA-Z]{2,14}\.)?[a-zA-Z]{2,14}">
+                <span></span>
+                <label>Email</label>
+           
+            </div>
+            <div class="txt_field">
+                <input type="password" name="password" id="password" title ="At least 1 Uppercase
+                At least 1 Lowercase
+                At least 1 Number
+                At least 1 Symbol, symbol allowed --> !@#$%^&*_=+-
+                Min 8 chars" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,120}$">
+                <span></span>
+                <label>Password</label>
+            </div>
+            <input type="submit" value="Sign up">
+            <div class="signup_link">
+                have an account? <a href="/sign-in-form">Sign in</a>
+            </div>
+            <div >
+                <h4>{{ .Message}}</h4>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

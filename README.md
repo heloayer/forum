@@ -10,9 +10,7 @@ filtering posts.
 
 
 
-## Usage/Examples
-In this example *forum:1.0* is the name of Docker image and *forum-ap* is the name of Docker container
-Build Docker image based on Dockerfile with Makefile:
+## Usage
 
 ```bash
 $ go run ./cmd/

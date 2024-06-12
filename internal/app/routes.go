@@ -7,8 +7,8 @@ import (
 )
 
 func (app *App) Run() http.Server {
-	welcomePaths := []string{ // создаем слайс строк из путей, кот. доступны неавторизованному юзеру
-		"/welcome/filter", // будут храниться в map WelcomeCookieOnPaths как ключ, со знач. пустой структуры
+	welcomePaths := []string{ 
+		"/welcome/filter", 
 		"/sign-in-form",
 		"/sign-up-form",
 		"/sign-in",
@@ -16,8 +16,8 @@ func (app *App) Run() http.Server {
 		"/welcome",
 		"/welcome/comment-view",
 	}
-	homePaths := []string{ // создаем слайс строк из путей, кот. доступны авторизованному юзеру
-		"/", // будут храниться в map HomeCookieOnPaths как ключ, со знач. пустой структуры
+	homePaths := []string{
+		"/", 
 		"/create-post-form",
 		"/comment-post",
 		"/like-post",
@@ -29,11 +29,11 @@ func (app *App) Run() http.Server {
 		"/create-post",
 		"/logout",
 	}
-	AddWelcomeCookieCheckOnPaths(welcomePaths...) // вызываем из пакета middleware
-	AddHomeCookieCheckOnPaths(homePaths...)       // вызываем из пакета middleware
+	AddWelcomeCookieCheckOnPaths(welcomePaths...)
+	AddHomeCookieCheckOnPaths(homePaths...)     
 
-	mux := http.NewServeMux()                                // новый маршрутизатор для безопасного исп. handlers
-	mux.HandleFunc("/", app.HomeMiddleware(app.HomeHandler)) // middleware func calls handlerfunc
+	mux := http.NewServeMux()                               
+	mux.HandleFunc("/", app.HomeMiddleware(app.HomeHandler)) 
 	mux.HandleFunc("/welcome", app.WelcomeMiddleware(app.WelcomeHandler))
 	mux.HandleFunc("/sign-in-form", app.WelcomeMiddleware(app.SignInPageHandler))
 	mux.HandleFunc("/sign-up-form", app.WelcomeMiddleware(app.SignUpPageHandler))

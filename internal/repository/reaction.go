@@ -12,17 +12,17 @@ func (p *postQuery) LikePost(postId int64, username string) error {
 		log.Println(err)
 		return err
 	}
-	// проверяем есть ли лайк
+	// check if like exists
 	query := `SELECT status FROM likes WHERE post_id = ? AND username = ?`
 	var like int
 	_ = p.db.QueryRow(query, postId, username).Scan(&like)
 
-	// проверка на дизлайк
+	// check for dislike
 	query = `SELECT status FROM dislikes WHERE post_id = ? AND username = ?`
 	var dislike int
 	_ = p.db.QueryRow(query, postId, username).Scan(&dislike)
 
-	// если лайка нет то ставим лайк
+	// if like doesn't exist we put it
 	if like == 0 && dislike == 0 {
 		query = `INSERT INTO likes(post_id, username, status) VALUES(?,?,?)`
 		_, err := p.db.Exec(query, postId, username, 1)
@@ -37,7 +37,7 @@ func (p *postQuery) LikePost(postId int64, username string) error {
 			log.Println(err)
 			return err
 		}
-		// если лайка есть то удаляем лайк
+		// if like exists we delete it
 	} else if like == 0 && dislike == 1 {
 		query = `DELETE FROM dislikes WHERE post_id = ? AND username = ?`
 		_, err := p.db.Exec(query, postId, username)
@@ -59,8 +59,7 @@ func (p *postQuery) LikePost(postId int64, username string) error {
 			log.Println(err)
 			return err
 		}
-		// если срабатывает else то значит пользователь дважды нажал на кнопку и соответственно мы стираем лайк
-	} else {
+	} else {   // user has pushed button 2 times and it's getting deleted
 		query = `DELETE FROM likes WHERE post_id = ? AND username = ?`
 		_, err := p.db.Exec(query, postId, username)
 		if err != nil {

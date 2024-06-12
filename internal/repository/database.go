@@ -8,7 +8,7 @@ import (
 )
 
 func NewDB() (*sql.DB, error) {
-	db, err := sql.Open("sqlite3", "database.db") // открываем базу, имя драйвера и имя базы
+	db, err := sql.Open("sqlite3", "database.db")
 	if err != nil {
 		return nil, err
 	}
@@ -21,8 +21,8 @@ func NewDB() (*sql.DB, error) {
 }
 
 func createTable(db *sql.DB) error {
-	query := []string{} // создаем слайс строк для вложения таблиц
-	// CREATE TABLE IF NOT EXISTS???  NOT NULL??
+	query := []string{} 
+	
 	users := `
 	CREATE TABLE IF NOT EXISTS users(
 		user_id INTEGER PRIMARY KEY AUTOINCREMENT,

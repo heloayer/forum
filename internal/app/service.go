@@ -2,16 +2,16 @@ package app
 
 import "forum/internal/service"
 
-type App struct { // структура в кот. будут храниться интерфейсы
+type App struct { 
 	authService    service.AuthService
-	sessionService service.SessionService   // интерфейс из service/session
+	sessionService service.SessionService   
 	postService    service.PostService
 	userService    service.UserService
 }
 
-func NewAppService( // заполняем структуру App полями интерфейсов
+func NewAppService( 
 	authService service.AuthService,
-	sessionService service.SessionService,       // для поля вызывается GetSessionByToken из интерфейса SessionQuery (repository/session)
+	sessionService service.SessionService,    
 	postService service.PostService,
 	userService service.UserService,
 ) App {

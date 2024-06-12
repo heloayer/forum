@@ -15,14 +15,14 @@ type AuthService interface {
 }
 
 type authService struct {
-	repository.UserQuery          // интерфейс // rep/user
-	repository.SessionQuery          // нтерфейс // rep/query
+	repository.UserQuery         
+	repository.SessionQuery         
 }
 
 func NewAuthService(dao repository.DAO) AuthService {
 	return &authService{
-		dao.NewUserQuery(),        // rep/data access object
-		dao.NewSessionQuery(),     // rep/data access object
+		dao.NewUserQuery(),       
+		dao.NewSessionQuery(),   
 	}
 }
 

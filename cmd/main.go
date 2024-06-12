@@ -14,22 +14,21 @@ import (
 )
 
 func main() {
-	db, err := repository.NewDB() // вызываем функцию для создания и заполнения db
+	db, err := repository.NewDB() 
 	if err != nil {
 		log.Fatal(err)
 		return
 	}
-	err = db.Ping() // проверяет соединение с базой данных
+	err = db.Ping() 
 	if err != nil {
 		log.Fatalf("cannot ping db: %v", err)
 	}
-	dao := repository.NewDao(db)               // dao - интерфейс с базой данных имеющая нужные данные для удобного доступа к БД
-	authService := service.NewAuthService(dao)   // service/auth
-	// интерфейсы с базой данных для удобного доступа к БД, реализуются через интерфейс dao   
+	dao := repository.NewDao(db)              
+	authService := service.NewAuthService(dao)   
 	sessionService := service.NewSessionService(dao)
 	postService := service.NewPostService(dao)
 	userService := service.NewUserService(dao)
-	app := app.NewAppService(authService, sessionService, postService, userService) // app - структура с полями интерфейсов // вызывается из сервис
+	app := app.NewAppService(authService, sessionService, postService, userService)
 	server := app.Run()
 
 	go func() {
